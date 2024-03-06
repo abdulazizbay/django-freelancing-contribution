@@ -1,0 +1,379 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oldwizard.uz</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+
+    <div id="root">
+        <header class="header">
+            <div class="container">
+                <div class="header-logo-translator">
+                        <a class="header-logo" href="/">
+                            <h3>OLD WIZARD</h3>
+                        </a>
+                    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select name="language">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Go">
+                    </form>
+                </div>
+                <nav class="header-nav">
+                    <ul class="header-nav-ul">
+                        <li class="nav__item">
+                            <a class="nav__link active-link" href="#home">
+                                {% trans 'Home' %}
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link active-link" href="#about">
+                                {% trans 'About' %}
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="#skills">
+                                {% trans 'Skills' %}
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="#services">
+                                {% trans 'Services' %}
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="#projects">
+                                {% trans 'Projects' %}
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="#contact">
+                                {% trans 'Contact' %}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main class="main">
+            <section id="home" class="home__section">
+                <div class="container">
+                    <div class="home-row">
+                        <div class="home-social-content">
+                            <div class="home-social-group">
+                                <a class="home__social-icon" href="https://www.instagram.com/old_wizard_mtb/"><i class="fa-brands fa-instagram"></i></a>
+                                <a class="home__social-icon" href="https://t.me/kuriyama_miraiiii"><i class="fa-solid fa-paper-plane"></i></a>
+                                <a class="home__social-icon" href="https://github.com/oldwizardmtb"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                            <div class="home-content">
+                                <h1 class="home__title">OLD WIZARD</h1>
+                                <h3 class="home__subtitle">{% trans 'Backend Developer' %}</h3>
+                                <div  class="home__description">
+                                    <p>{% trans 'Hello, I`m old_wizard, a backend developer skilled in Python, Django, and AWS. I specialize in efficient solutions for e-commerce, real-time chat, and task automation' %}</p>
+                                </div>
+                                <div class="home__button">
+                                    <p><a href="#contact">{% trans 'Send message' %}</a></p>
+                                </div>
+                                <div class="home__scroll">
+                                    <a   href="#about"><i class="fa-solid fa-computer-mouse"></i>{% trans 'Scroll down' %}   &#129047</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="home-img">
+                            <img src="{% static 'img/mirai.jpg' %}" alt="kuriyama mirai">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="about__section">
+                <div class="container">
+                    <div class="about-column">
+                        <div class="about__intro">
+                            <h1 class="about__title">{% trans 'About me' %}</h1>
+                            <h5 class="about__subtitle">
+                                {% trans 'My introduction' %}
+                            </h5>
+                        </div>
+                        <div class="about__content">
+                            <div class="about__photo">
+                                <img src="{% static 'img/mirai.jpg' %}" alt="kuriyama mirai">
+                            </div>
+                            <div class="about-data">
+                                <div class="about-boxes-group">
+                                    <div class="about__box">
+                                        <h3 class="about-box-title">{% trans 'Experience' %}</h3>
+                                        <p class="about-box-subtitle">{% trans '1 year working' %}</p>
+                                    </div>
+                                    <div class="about__box">
+                                        <h3 class="about-box-title">{% trans 'Completed' %}</h3>
+                                        <p class="about-box-subtitle">{% trans '10+ Projects' %}</p>
+                                    </div>
+                                    <div class="about__box">
+                                        <h3 class="about-box-title">{% trans 'Support' %}</h3>
+                                        <p class="about-box-subtitle">{% trans 'When he`s awake' %}</p>
+                                    </div>
+                                </div>
+                                <div class="about__description">
+                                    <p>
+                                        {% trans 'I offer expert backend services in Python, Django, and AWS. Optimize efficiency with my specialized solutions.' %}
+                                        {% trans 'I provide specialized Django backend services, optimizing projects for efficiency' %}
+                                        {% trans 'I offer tailored Python backend services, delivering efficient and effective solutions. ' %}
+                                    </p>
+                                </div>
+
+                                <div class="about__button">
+                                    <a  href="#contact"><p>{% trans 'Use the services' %}</p></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+            <section class="skills__section">
+                <div class="container">
+                    <div class="skills__row">
+                        <div class="skills__intro">
+                            <h1 class="skills__intro__title">{% trans 'Skills' %}</h1>
+                            <h5  class="skills__intro__subtitle">{% trans 'My technical level' %}</h5>
+                        </div>
+                        <div class="skills-boxes-group">
+                            <div class="skills__box__backend">
+                                <div class="skills__box__title">
+                                    <h6>{% trans 'Backend Developer' %}</h6>
+                                </div>
+                                <div class="skills__box__content">
+                                    <div class="skills__box__data__main">
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">Python  <i class="fa-brands fa-python"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">Arduino  <i class="fa-solid fa-robot"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">Django  <i class="fa-brands fa-python"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">MySQL  <i class="fa-solid fa-database"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced<' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">GitHub  <i class="fa-brands fa-github"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">SQL  <i class="fa-solid fa-database"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="skills__box__frontend">
+                                <div class="skills__box__title">
+                                    <h6>{% trans 'Frontend Developer' %}</h6>
+                                </div>
+                                <div class="skills__box__content">
+
+                                    <div class="skills__box__data__main">
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">HTML  <i class="fa-brands fa-html5"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">CSS  <i class="fa-brands fa-css3"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">Bootstrap  <i class="fa-brands fa-bootstrap"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">JS  <i class="fa-brands fa-js"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">GitHub  <i class="fa-brands fa-github"></i></h3>
+                                            <span class="skills__level">{% trans 'Advanced' %}</span>
+                                        </div>
+                                        <div class="skills__box_data__grid">
+                                            <h3 class="skills__name">Ps  <i class="fa-solid fa-p"></i></h3>
+                                            <span class="skills__level">{% trans 'Intermediate' %}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+            <section id="services" class="services section">
+                <div class="container">
+                    <h1 class="section__title_4">{% trans 'Services' %}</h1>
+                    <span class="section__subtitle_4">{% trans 'What I offer' %}</span>
+                    <div class="services__container">
+                        <div class="services__content">
+                            <i class="fa-solid fa-code"></i>
+                            <h3 class="services__title">{% trans 'Create' %}</h3>
+                            <h3 class="services__title_2">{% trans 'Application' %}</h3>
+                            <span class="services__button">{% trans 'View More' %} &#10140;</span>
+                        </div>
+                        <div class="services__content">
+                            <i class="fa-solid fa-hashtag"></i>
+                            <h3 class="services__title">{% trans 'Website' %}<br>{% trans 'Develop' %}</h3>
+                            <span class="services__button">{% trans 'View More' %} &#10140;</span>
+                        </div>
+                        <div class="services__content">
+                            <i class="fa-solid fa-server"></i>
+                            <h3 class="services__title">{% trans 'Configuring' %} <br>{% trans 'The Server' %}</h3>
+                            <span class="services__button">{% trans 'View More' %} &#10140;</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section id="projects" class="projects__container">
+                <div class="container">
+                    <h1 class="section__title_5">{% trans 'Projects' %}</h1>
+                    <span class="section__subtitle_5">{% trans 'Most recent work' %}</span>
+                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms; cursor: grab; transition-delay: 0ms;">
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/photo.jpg' %}" alt="photo">
+                            <h3 class="projects__name">Новостной сайт</h3>
+                            <p class="projects__description">#web   #news</p>
+                            <a class="projects__button" href="https://artem.itc45.uz/">{% trans 'View  ' %}&#10140;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section id="contact" class="contact__section">
+                <div class="container">
+                    <h1 class="section__title_6">{% trans 'Contact' %}</h1>
+                    <div class="contact__container_global">
+                        <div class="contact__content_1">
+                            <h3 class="contact__title_1">{% trans 'Talk to me' %}</h3>
+                            <div class="contact__info">
+                                <div class="contact__card">
+                                    <a class="contact__social-icon" href="mailto:sobirjon007shirinboyev@gmail.com"><i class="fa-solid fa-at"></i></a>
+                                    <h3 class="contact__card-title_1">Email</h3>
+                                    <span class="contact__card-data_1">sobirjon007shirinboyev@gmail.com</span><br>
+                                    <a class="contact__button" href="mailto:sobirjon007shirinboyev@gmail.com">{% trans 'Write me' %} &#10140;</a>
+                                </div>
+                                <div class="contact__card">
+                                    <a class="contact__social-icon" href="https://t.me/@kuriyama_miraiiii"><i class="fa-solid fa-paper-plane"></i></a>
+                                    <h3 class="contact__card-title_2">Telegram</h3>
+                                    <span class="contact__card-data_2">@kuriyama_miraiiii</span><br>
+                                    <a class="contact__button" href="https://t.me/@kuriyama_miraiiii">{% trans 'Write me' %} &#10140;</a>
+                                </div>
+                                <div class="contact__card">
+                                    <a class="contact__social-icon" href="https://www.instagram.com/old_wizard_mtb/"><i class="fa-brands fa-instagram"></i></a>
+                                    <h3 class="contact__card-title_3">Instagram</h3>
+                                    <span class="contact__card-data_3">@old_wizard_mtb</span><br>
+                                    <a class="contact__button" href="https://www.instagram.com/old_wizard_mtb/">{% trans 'Write me' %} &#10140;</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact__content_2">
+                            <h3 class="contact__title_2">{% trans 'Write me your message' %}</h3>
+                            <form class="contact__form" method="post" action="{% url 'send_telegram_message' %}">
+                                {% csrf_token %}
+                                <div class="contact__form-div">
+                                    <label class="contact__form-tag">{% trans 'Name' %}</label>
+                                    <input class="contact__form-input" type="text" name="name" placeholder="{% trans 'Write your name' %}" value="">
+                                </div>
+                                <div class="contact__form-div">
+                                    <label class="contact__form-tag">{% trans 'Mobile Phone' %}</label>
+                                    <input class="contact__form-input" type="tel" name="phone_number" placeholder="{% trans 'Write your mobile phone' %}" value="">
+                                </div>
+                                <div class="contact__form-div">
+                                    <label class="contact__form-tag">{% trans 'Message' %}</label>
+                                    <textarea class="contact__form-input_2" name="message" cols="30" rows="10" placeholder="{% trans 'Write your message' %}"></textarea>
+                                </div>
+                                <button class="contact_send_button" type="submit">{% trans 'Send Message' %}<i class="fa-solid fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+
+
+
+
+        <footer>
+            <div class="container">
+                <div class="footer__container container">
+                    <h1 class="footer__title">OLD WIZARD</h1>
+                    <ul class="footer__ul">
+                        <li class="nav__item">
+                            <a class="nav__link active-link" href="#about">
+                                Aboout
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="#services">
+                                Services
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="# projects">
+                                Projects
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="footer__social">
+                        <a class="footer__social-link" href="https://www.instagram.com/old_wizard_mtb/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a class="footer__social-link" href="https://t.me/kuriyama_miraiiii" target="_blank"><i class="fa-solid fa-paper-plane"></i></a>
+                        <a class="footer__social-link" href="https://github.com/oldwizardmtb" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <span class="footer__copy">© OLD WIZARD 2024</span>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+</body>
+</html>
+
+
+
